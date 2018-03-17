@@ -6,7 +6,7 @@
 
 import React from "react";
 import { StackNavigator } from 'react-navigation';
-import { LoginScreen, HistoryScreen, MainScreen } from "./Screen";
+import { LoginScreen, HistoryScreen, MainScreen, QRCodeScreen } from "./Screen";
 import { observer, inject } from 'mobx-react';
 
 const Navigation = StackNavigator({
@@ -18,6 +18,9 @@ const Navigation = StackNavigator({
   },
   History: {
     screen: inject("store")(observer(HistoryScreen))
+  },
+  QRCode: {
+    screen: inject("store")(observer(QRCodeScreen))
   }
 });
 
