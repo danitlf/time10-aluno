@@ -4,7 +4,91 @@
  * @flow
  */
 
-import React from "react";
-import { View } from "react-native";
+import React, { Component } from "react";
+import {
+    View,
+    StyleSheet,
+    TouchableOpacity
+} from "react-native";
+import {Button, Icon, Text} from 'native-base';
 
-export default () => <View />;
+
+
+export default class Main extends Component {
+    static navigationOptions = {
+        headerMode: 'none',
+        header: null,
+        navigationOptions: {
+            gesturesEnabled: false
+        }
+    }
+
+
+    constructor(props) {
+        super(props)
+
+
+    }
+
+    render() {
+        return (
+            <View style={styles.containerStyle}>
+                <Text style={styles.textProfessor}>
+                    Olá, Nelson
+                </Text>
+
+                <TouchableOpacity style={styles.mainBtn} onPress={this._onPressButton}>
+                    <Icon style={styles.iconBtn} name='ios-qr-scanner' />
+                    <Text style={styles.labelBtn}>Marcar presença</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.mainBtn} onPress={this._onPressButton}>
+                    <Icon style={styles.iconBtn} name='ios-list' />
+                    <Text style={styles.labelBtn}>Histórico</Text>
+                </TouchableOpacity>
+            </View>
+        );
+    }
+}
+
+
+const styles = StyleSheet.create({
+    containerStyle: {
+        flex: 1,
+        backgroundColor: '#643796',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    textProfessor: {
+        fontSize: 40,
+        color: 'white',
+        top: 80,
+        position: 'absolute'
+    },
+
+    labelBtn: {
+        fontWeight: '600',
+    },
+
+    mainBtn: {
+        width: 250,
+        height: 60,
+        marginTop: 10,
+        marginBottom: 5,
+        display: 'flex',
+        flexDirection: 'row',
+        backgroundColor: 'white',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 4,
+    },
+
+    iconBtn: {
+        position: 'absolute',
+        left: 15
+    }
+
+});
+
+
+
