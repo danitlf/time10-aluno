@@ -5,9 +5,10 @@
  */
 
 import React, { Component } from "react";
-import { View, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Image, StatusBar } from "react-native";
 import { Button, Icon, Text, Item, Input } from "native-base";
-import {NavigationScreenProps} from "react-navigation";
+import { NavigationScreenProps, NavigationActions } from "react-navigation";
+
 
 export default class extends Component<NavigationScreenProps> {
   static navigationOptions = {
@@ -15,12 +16,21 @@ export default class extends Component<NavigationScreenProps> {
         backgroundColor: "#fff",
         borderBottomWidth: 0
       },
-      headerTintColor: "#643796",
-      headerMode: "screen"
+      headerTintColor: "#643796"
   };
+
+  isGoingToHome = false
 
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount = () => {
+    StatusBar.setHidden(false);
+  }
+  
+  componentWillUnmount() {
+    StatusBar.setHidden(this.isGoingToHome ? false : true);
   }
 
   render() {
@@ -35,7 +45,14 @@ export default class extends Component<NavigationScreenProps> {
           <Input placeholder="Senha" />
         </Item>
         <Button block style={{ marginTop: 50, backgroundColor: "#643796" }} onPress={()=>{
-            this.props.navigation.replace("Main");
+            this.isGoingToHome = true;
+            const resetAction = NavigationActions.reset({
+              index: 0,
+              actions: [
+                NavigationActions.navigate({ routeName: "Main" })
+              ]
+            });
+            this.props.navigation.dispatch(resetAction);
         }}>
           <Text>Login</Text>
         </Button>
