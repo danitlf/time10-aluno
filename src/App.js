@@ -7,7 +7,7 @@
 import React from 'react';
 import Navigation from './Navigation';
 import { Provider } from 'mobx-react';
-import { Store } from './Store';
+import Store  from './Store';
 
 export default () => (
   <Provider store={Store}>
