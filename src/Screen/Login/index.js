@@ -8,7 +8,7 @@ import React, { Component } from "react";
 import { View, StyleSheet, TouchableOpacity, Image, StatusBar } from "react-native";
 import { Button, Icon, Text, Item, Input } from "native-base";
 import { NavigationScreenProps, NavigationActions } from "react-navigation";
-
+import Service from "../Service";
 
 export default class extends Component<NavigationScreenProps> {
   static navigationOptions = {
@@ -45,6 +45,7 @@ export default class extends Component<NavigationScreenProps> {
           <Input placeholder="Senha" />
         </Item>
         <Button block style={{ marginTop: 50, backgroundColor: "#643796" }} onPress={()=>{
+          
             this.isGoingToHome = true;
             const resetAction = NavigationActions.reset({
               index: 0,
