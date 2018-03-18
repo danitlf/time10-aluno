@@ -1,12 +1,16 @@
 import { observable } from "mobx";
 
 export default observable({
+  willDisplayAvaliation: false,
   login: {
     nome: undefined,
     foto: undefined,
-    matricula: undefined
+    matricula: undefined,
+    _id: undefined,
+    _rev: undefined
   },
   history: {
+
     historyFiltered: [],
     history: [
       {
@@ -28,6 +32,16 @@ export default observable({
       }
     ]
   },
-  main: {},
+  main: {
+      isInClass: false,
+      idPresenca: "",
+      aula: {
+        payload: "",
+        _id: undefined,
+        disciplina: "",
+        professor: "",
+        data: undefined
+      }
+  },
   qrCode: {}
 });

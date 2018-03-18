@@ -5,7 +5,7 @@
  */
 
 import React from "react";
-import { View, StyleSheet, Image, StatusBar } from "react-native";
+import { View, StyleSheet, Image, StatusBar, PushNotificationIOS } from "react-native";
 import Video from "react-native-video";
 import { NavigationScreenProps } from "react-navigation";
 import { Button, Text } from "native-base";
@@ -43,6 +43,7 @@ const VideoBackground = ({ onPress }) => (
       repeat={true}
       key="video2"
     />
+    
   </View>
 );
 

@@ -11,6 +11,7 @@ import {
     TouchableOpacity
 } from "react-native";
 import {Button, Icon, Text} from 'native-base';
+import ClassificationModal from '../ClassificationModal';
 
 
 
@@ -26,23 +27,26 @@ export default class Main extends Component {
 
     constructor(props) {
         super(props)
-
-
     }
 
     render() {
         return (
             <View style={styles.containerStyle}>
+                <ClassificationModal professor={this.props.store.main.aula.professor} disciplina={this.props.store.main.aula.disciplina} />
                 <Text style={styles.textProfessor}>
                     Olá, {this.props.store.login.nome}
                 </Text>
-
-                <TouchableOpacity style={styles.mainBtn} onPress={()=>{
-                    this.props.navigation.navigate("QRCode")
-                }}>
-                    <Icon style={styles.iconBtn} name='ios-qr-scanner' />
-                    <Text style={styles.labelBtn}>Marcar presença</Text>
-                </TouchableOpacity>
+                {
+                    this.props.store.main.isInClass ?
+                    <Text style={{fontWeight: "bold", fontSize:26, color: "#fff", marginBottom:20}}>Você está em aula!</Text>
+                    :
+                    <TouchableOpacity style={styles.mainBtn} onPress={()=>{
+                        this.props.navigation.navigate("QRCode")
+                    }}>
+                        <Icon style={styles.iconBtn} name='ios-qr-scanner' />
+                        <Text style={styles.labelBtn}>Marcar presença</Text>
+                    </TouchableOpacity>
+                }
                 <TouchableOpacity style={styles.mainBtn} onPress={() => this.props.navigation.navigate("History")}>
                     <Icon style={styles.iconBtn} name='ios-list' />
                     <Text style={styles.labelBtn}>Histórico</Text>

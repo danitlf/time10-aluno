@@ -10,20 +10,20 @@ import { Button, Icon, Text, Item, Input } from "native-base";
 import { NavigationScreenProps, NavigationActions } from "react-navigation";
 import Modal from "react-native-modal";
 import StarRating from 'react-native-star-rating';
+import { observer, inject } from "mobx-react";
+import Service from "../../Service";
 
 
 
 
-export default class extends Component<NavigationScreenProps> {
+export default inject("store")(observer(class extends Component<NavigationScreenProps> {
 
     constructor(props) {
         super(props);
 
         this.state = {
             starCount: 0,
-            text: "", 
-            active: this.props.active
-
+            text: ""
         }
     }
 
@@ -36,7 +36,7 @@ export default class extends Component<NavigationScreenProps> {
     render() {
         return (
             <Modal
-                isVisible={this.state.active}
+                isVisible={this.props.store.willDisplayAvaliation}
                 animationInTiming={1000}
                 animationOutTiming={1000}
                 backdropTransitionInTiming={1000}
@@ -70,7 +70,13 @@ export default class extends Component<NavigationScreenProps> {
 
                     <View style={styles.modalBottom}>
                         <Button block style={{ marginTop: 50, backgroundColor: "#643796", width: 200 }} onPress={() => {
-                            this.setState({active: false}) 
+                            // alert(JSON.stringify(this.props.store.main));
+                            Service.avaliar(this.props.store.main.idPresenca,this.state.starCount,this.state.text).then((data)=>{
+                                // alert(JSON.stringify(data));
+                                this.props.store.willDisplayAvaliation = false;
+                            }).catch((error)=>alert(error.message)).then(()=>{
+                                 this.setState({ starCount: 0, text: "" });
+                            });
                         }}>
                             <Text>Enviar</Text>
                         </Button>
@@ -79,7 +85,7 @@ export default class extends Component<NavigationScreenProps> {
             </Modal>
         )
     }
-}
+}));
 
 const styles = StyleSheet.create({
 

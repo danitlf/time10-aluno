@@ -9,7 +9,6 @@ import { View, StyleSheet, TouchableOpacity, Image, StatusBar } from "react-nati
 import { Button, Icon, Text, Item, Input } from "native-base";
 import { NavigationScreenProps, NavigationActions } from "react-navigation";
 import Service from "../../Service";
-import ClassificationModal from '../ClassificationModal';
 
 export default class extends Component<NavigationScreenProps> {
   static navigationOptions = {
@@ -25,10 +24,7 @@ export default class extends Component<NavigationScreenProps> {
   constructor(props) {
     super(props);
     this.state = {
-      username: ""
-    }
-
-    this.state = {
+      username: "",
       starCount: 0
     }
   }
@@ -54,9 +50,11 @@ export default class extends Component<NavigationScreenProps> {
         </Item>
         <Button block style={{ marginTop: 50, backgroundColor: "#643796" }} onPress={()=>{
           Service.login(this.state.username).then((user)=>{
-            this.props.store.login.nome = user.nome
-            this.props.store.login.foto = user.foto
-            this.props.store.login.matricula = user.matricula
+            this.props.store.login.nome = user.nome;
+            this.props.store.login.foto = user.foto;
+            this.props.store.login.matricula = user.matricula;
+            this.props.store.login._id = user._id;
+            this.props.store.login._rev = user._rev;
             this.isGoingToHome = true;
             const resetAction = NavigationActions.reset({
               index: 0,
