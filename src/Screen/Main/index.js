@@ -34,7 +34,7 @@ export default class Main extends Component {
         return (
             <View style={styles.containerStyle}>
                 <Text style={styles.textProfessor}>
-                    Olá, Nelson
+                    Olá, {this.props.store.login.nome}
                 </Text>
 
                 <TouchableOpacity style={styles.mainBtn} onPress={()=>{

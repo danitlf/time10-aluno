@@ -8,7 +8,7 @@ import React, { Component } from "react";
 import { View, StyleSheet, TouchableOpacity, Image, StatusBar } from "react-native";
 import { Button, Icon, Text, Item, Input } from "native-base";
 import { NavigationScreenProps, NavigationActions } from "react-navigation";
-import Service from "../Service";
+import Service from "../../Service";
 
 export default class extends Component<NavigationScreenProps> {
   static navigationOptions = {
@@ -23,6 +23,9 @@ export default class extends Component<NavigationScreenProps> {
 
   constructor(props) {
     super(props);
+    this.state = {
+      username: ""
+    }
   }
 
   componentDidMount = () => {
@@ -38,14 +41,17 @@ export default class extends Component<NavigationScreenProps> {
         <Image source={require("../../../assets/images/anima.png")} style={{width:150,resizeMode:"contain", marginTop: -80}} />
         <Item style={{ borderBottomColor: "#643796" }}>
           <Icon style={{ color: "#643796" }} active name="ios-contact" />
-          <Input placeholder="Usuário" />
+          <Input placeholder="Usuário" onChangeText={(text)=>this.setState({username:text})} />
         </Item>
         <Item style={{ borderBottomColor: "#643796" }}>
           <Icon style={{ color: "#643796" }} active name="ios-key" />
           <Input placeholder="Senha" />
         </Item>
         <Button block style={{ marginTop: 50, backgroundColor: "#643796" }} onPress={()=>{
-          
+          Service.login(this.state.username).then((user)=>{
+            this.props.store.login.nome = user.nome
+            this.props.store.login.foto = user.foto
+            this.props.store.login.matricula = user.matricula
             this.isGoingToHome = true;
             const resetAction = NavigationActions.reset({
               index: 0,
@@ -54,6 +60,9 @@ export default class extends Component<NavigationScreenProps> {
               ]
             });
             this.props.navigation.dispatch(resetAction);
+          }).catch((error)=>{
+            alert(error.message);
+          })
         }}>
           <Text>Login</Text>
         </Button>
