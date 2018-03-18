@@ -9,14 +9,15 @@ import { View, StyleSheet, TouchableOpacity, Image, StatusBar } from "react-nati
 import { Button, Icon, Text, Item, Input } from "native-base";
 import { NavigationScreenProps, NavigationActions } from "react-navigation";
 import Service from "../../Service";
+import ClassificationModal from '../ClassificationModal';
 
 export default class extends Component<NavigationScreenProps> {
   static navigationOptions = {
-      headerStyle: {
-        backgroundColor: "#fff",
-        borderBottomWidth: 0
-      },
-      headerTintColor: "#643796"
+    headerStyle: {
+      backgroundColor: "#fff",
+      borderBottomWidth: 0
+    },
+    headerTintColor: "#643796"
   };
 
   isGoingToHome = false
@@ -26,12 +27,16 @@ export default class extends Component<NavigationScreenProps> {
     this.state = {
       username: ""
     }
+
+    this.state = {
+      starCount: 0
+    }
   }
 
   componentDidMount = () => {
     StatusBar.setHidden(false);
   }
-  
+
   componentWillUnmount() {
     StatusBar.setHidden(this.isGoingToHome ? false : true);
   }
@@ -71,6 +76,11 @@ export default class extends Component<NavigationScreenProps> {
 }
 
 const styles = StyleSheet.create({
+
+  modal: {
+    backgroundColor: "white",
+  },
+
   containerStyle: {
     flex: 1,
     backgroundColor: "#fff",
