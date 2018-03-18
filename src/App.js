@@ -5,12 +5,15 @@
  */
 
 import React from 'react';
+import { StatusBar, View } from "react-native";
 import Navigation from './Navigation';
 import { Provider } from 'mobx-react';
 import { Store } from './Store';
 
-export default () => (
-  <Provider store={Store}>
-    <Navigation />
-  </Provider>
-);
+export default () => {
+  return (
+    <Provider store={Store}>
+      <Navigation />
+    </Provider>
+  );
+}

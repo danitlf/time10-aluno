@@ -5,7 +5,7 @@
  */
 
 import React from "react";
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet, Image, StatusBar } from "react-native";
 import Video from "react-native-video";
 import { NavigationScreenProps } from "react-navigation";
 import { Button, Text } from "native-base";
@@ -15,17 +15,24 @@ export default class extends React.Component<NavigationScreenProps> {
         header: null
     }
     render() {
-        return <VideoBackground onPress={()=>{
+        return (
+          <VideoBackground onPress={()=>{
             this.props.navigation.navigate("Login");
-        }} />
+          }} />
+        );
     }
 };
 
 const VideoBackground = ({ onPress }) => (
   <View style={styles.background}>
+    <StatusBar hidden={true} />
     <View style={styles.logo}>
       <Image source={require("../../../assets/images/cropped-logo.png")} />
-      <Button block style={{ marginTop: 100, backgroundColor: "#643796"}} onPress={onPress}>
+      <Button
+        block
+        style={{ marginTop: 100, backgroundColor: "#643796" }}
+        onPress={onPress}
+      >
         <Text>Entrar</Text>
       </Button>
     </View>
