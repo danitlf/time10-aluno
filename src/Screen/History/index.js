@@ -5,7 +5,7 @@
 
 import React, { Component } from 'react';
 import { Container, Header, Item, Input, Icon, Button, Text, Card, CardItem, Right, Thumbnail, CheckBox } from 'native-base';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 
 export default class SearchBarExample extends Component {
     static navigationOptions = {
@@ -53,7 +53,7 @@ export default class SearchBarExample extends Component {
 
     filterAulas(search) {
         this.props.store.history.historyFiltered = this.props.store.history.history.filter((d) => {
-            if(search == "") {
+            if (search == "") {
                 return true;
             }
             return d.disciplina.toLowerCase().indexOf(search.toLowerCase()) != -1;
@@ -63,10 +63,14 @@ export default class SearchBarExample extends Component {
     render() {
         return (
             <Container>
-                <Header searchBar rounded>
+                <Header style={styles.headerSearch} searchBar rounded>
+
+                    <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={styles.iconBack} >
+                        <Icon name='arrow-back' />
+                    </TouchableOpacity>
                     <Item>
                         <Icon name="ios-search" />
-                        <Input placeholder="Buscar" onChangeText={(textSearched) => {this.filterAulas(textSearched)}} />
+                        <Input placeholder="Buscar" onChangeText={(textSearched) => { this.filterAulas(textSearched) }} />
                     </Item>
                 </Header>
                 <FlatList
@@ -111,6 +115,17 @@ const styles = StyleSheet.create({
     percentageText: {
         fontWeight: '900',
         fontSize: 20,
+    },
+
+    iconBack: {
+        marginRight: 20,
+    },
+
+    headerSearch: {
+        justifyContent: 'center',
+        alignItems: 'center',
     }
+
+
 
 });

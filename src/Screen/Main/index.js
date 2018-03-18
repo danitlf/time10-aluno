@@ -41,7 +41,7 @@ export default class Main extends Component {
                     <Icon style={styles.iconBtn} name='ios-qr-scanner' />
                     <Text style={styles.labelBtn}>Marcar presença</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.mainBtn} onPress={this._onPressButton}>
+                <TouchableOpacity style={styles.mainBtn} onPress={() => this.props.navigation.navigate("History")}>
                     <Icon style={styles.iconBtn} name='ios-list' />
                     <Text style={styles.labelBtn}>Histórico</Text>
                 </TouchableOpacity>
