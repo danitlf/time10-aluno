@@ -12,7 +12,8 @@ import {
   Text,
   TouchableHighlight,
   View,
-  Image
+  Image,
+  Alert
 } from "react-native";
 import Camera from "react-native-camera";
 
@@ -21,13 +22,33 @@ export default class extends Component {
     title: "Escaneie o QRCode da Aula",
     headerTintColor: "#643796"
   };
+
+  constructor(props) {
+      super(props);
+      this.state = {isQrCodeCaptured: false};
+  }
   
   render() {
     return <View style={styles.container}>
         <Camera ref={cam => {
             this.camera = cam;
           }} style={styles.preview} aspect={Camera.constants.Aspect.fill} barCodeTypes={["qr"]} onBarCodeRead={(data, bounds) => {
-            alert(JSON.stringify(data));
+            if (!this.state.isQrCodeCaptured) {
+                this.setState({isQrCodeCaptured: true})
+                Alert.alert(
+                "Sucesso",
+                "Presença marcada com sucesso!",
+                [
+                    {
+                    text: "OK",
+                    onPress: () => {
+                        this.props.navigation.goBack();
+                    }
+                    }
+                ],
+                { cancelable: false }
+                );
+            }
           }}>
           <Image style={{ position: "absolute", top: 0, left: 0 }} source={require("../../../assets/images/qrcodeTarget.png")} />
           <Image style={{ position: "absolute", top: 0, right: 0, transform: [{ rotate: "90deg" }] }} source={require("../../../assets/images/qrcodeTarget.png")} />
