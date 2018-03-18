@@ -5,7 +5,7 @@
 
 import React, { Component } from 'react';
 import { Container, Header, Item, Input, Icon, Button, Text, Card, CardItem, Right, Thumbnail, CheckBox } from 'native-base';
-import { FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import { FlatList, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
 
 export default class SearchBarExample extends Component {
     static navigationOptions = {
@@ -19,16 +19,17 @@ export default class SearchBarExample extends Component {
         this.filterAulas = this.filterAulas.bind(this);
 
         this.filterAulas("");
+
     }
 
     _renderAulas = (aulas) => {
         return aulas.map((aula) => {
             return (
                 <CardItem>
-                    <Text>{aula.date}</Text>
+                    <Text>{aula.date}</Text> 
                     <Right>
-                        <CheckBox disabled checked={aula.check} />
-                    </Right>
+                        <Icon style={{ color: "#643796" }} name={aula.check ? "md-checkmark": "md-close"}/> 
+                    </Right> 
                 </CardItem>
             );
         });
@@ -38,7 +39,6 @@ export default class SearchBarExample extends Component {
 
         <Card>
             <CardItem header>
-                <Thumbnail style={styles.imageProfessor} source={{ uri: 'https://abrilveja.files.wordpress.com/2016/05/professora-1-original4.jpeg' }} />
                 <Text style={styles.disciplinaText}>{item.disciplina}</Text>
                 <Right>
                     <Text style={styles.percentageText}>
@@ -63,13 +63,14 @@ export default class SearchBarExample extends Component {
     render() {
         return (
             <Container>
+                <StatusBar hidden={true} />
                 <Header style={styles.headerSearch} searchBar rounded>
 
                     <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={styles.iconBack} >
-                        <Icon name='arrow-back' />
+                        <Icon style={{ color: '#643796' }} name='arrow-back' />
                     </TouchableOpacity>
                     <Item>
-                        <Icon name="ios-search" />
+                        <Icon style={{ color: '#643796' }} name="ios-search" /> 
                         <Input placeholder="Buscar" onChangeText={(textSearched) => { this.filterAulas(textSearched) }} />
                     </Item>
                 </Header>
@@ -87,14 +88,14 @@ export default class SearchBarExample extends Component {
 const styles = StyleSheet.create({
     containerStyle: {
         flex: 1,
-        backgroundColor: '#643796',
+        backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
     },
 
     cardList: {
         marginBottom: 0,
-        marginTop: 2,
+        marginTop: 1,
         height: 80,
         justifyContent: "center",
     },
@@ -106,10 +107,11 @@ const styles = StyleSheet.create({
     },
 
     disciplinaText: {
-        marginLeft: 20,
+        marginLeft: 10,
         fontSize: 18,
         width: 140,
         fontWeight: '800',
+        color: '#643796'
     },
 
     percentageText: {
@@ -124,6 +126,7 @@ const styles = StyleSheet.create({
     headerSearch: {
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: 'white'
     }
 
 
