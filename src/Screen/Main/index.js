@@ -37,7 +37,9 @@ export default class Main extends Component {
                     Olá, Nelson
                 </Text>
 
-                <TouchableOpacity style={styles.mainBtn} onPress={this._onPressButton}>
+                <TouchableOpacity style={styles.mainBtn} onPress={()=>{
+                    this.props.navigation.navigate("QRCode")
+                }}>
                     <Icon style={styles.iconBtn} name='ios-qr-scanner' />
                     <Text style={styles.labelBtn}>Marcar presença</Text>
                 </TouchableOpacity>

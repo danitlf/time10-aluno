@@ -16,8 +16,7 @@ export default class extends Component<NavigationScreenProps> {
         backgroundColor: "#fff",
         borderBottomWidth: 0
       },
-      headerTintColor: "#643796",
-      headerMode: "screen"
+      headerTintColor: "#643796"
   };
 
   isGoingToHome = false
