@@ -13,5 +13,22 @@
          } else {
              throw Error("Login ou senha inválido!");
          }
-     })
- }
+     }),
+     marcarPresenca: (token,aluno) => fetch(ENDPOINT+'qrcode/validar', {
+        method: "POST",
+        body: JSON.stringify({
+            "token":token,
+            "aluno":aluno
+        }),
+        headers:{'Content-type':'application/json'}
+    }).then((data)=>data.json().then(d=>d.id)),
+    avaliar: (idPresenca,estrelas,descricao) => fetch(ENDPOINT+'avaliacao/avaliar', {
+        method: "POST",
+        body: JSON.stringify({
+            "presencaId":idPresenca,
+            "estrelas":estrelas,
+            "descricao": descricao
+        }),
+        headers:{'Content-type':'application/json'}
+    }).then((data)=>data.json()),
+}
